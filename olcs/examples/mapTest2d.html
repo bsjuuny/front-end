@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="kr" lang="kr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index, all" />
+    <title>olcesium example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-polyfills/0.1.42/polyfill.min.js"></script>
+    <style>* {margin:0;padding:0;}</style>
+
+
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet/leaflet-openweathermap.css" />
+    <link rel="stylesheet" type="text/css" href="leaflet/files/map.css" />
+
+    <link rel="stylesheet" type="text/css" href="windjs-leaflet/wind-js-leaflet.css" />
+
+    <script src="leaflet/leaflet/leaflet.js"></script>
+    <script src="leaflet/leaflet/Permalink.js"></script>
+    <script src="leaflet/leaflet/Permalink.Layer.js"></script>
+    <script src="leaflet/leaflet/Permalink.Overlay.js"></script>
+    <script src="leaflet/leaflet/leaflet-openweathermap.js"></script>
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet/leaflet-languageselector.css" />
+    <script src="leaflet/leaflet/leaflet-languageselector.js"></script>
+    <script src="leaflet/leaflet/leaflet-bing-layer.js"></script>
+    <script src="leaflet/files/map_i18n.js"></script>
+    <script src="leaflet/files/map.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="windjs-leaflet/wind-js-leaflet.js"></script>
+  </head>
+  <body>
+    <div id="map" style="height:400px;height:calc(100vh);"></div>
+      
+    <!-- <input id="enable" type="button" value="Enable/disable" /> -->
+
+    <!-- <input type="button" value="Enable/disable lightning (only 3d)" onclick="javascript:toggleTime()"/>
+    <select id="time">
+      <option value="">Now</option>
+      <option value="0">0:00</option>
+      <option value="3">3:00</option>
+      <option value="6">6:00</option>
+      <option value="9">9:00</option>
+      <option value="12">12:00</option>
+      <option value="15">15:00</option>
+      <option value="18">18:00</option>
+      <option value="21">21:00</option>
+    </select> -->
+
+    <script>
+      //initMap();
+
+    //   function initDemoMap(){
+
+    //     var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    //         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, ' +
+    //         'AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    //     });
+
+    //     var Esri_DarkGreyCanvas = L.tileLayer(
+    //         "http://{s}.sm.mapstack.stamen.com/" +
+    //         "(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/" +
+    //         "{z}/{x}/{y}.png",
+    //         {
+    //             attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, ' +
+    //             'NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+    //         }
+    //     );
+
+    //     var baseLayers = {
+    //         "Satellite": Esri_WorldImagery,
+    //         "Grey Canvas": Esri_DarkGreyCanvas
+    //     };
+
+    //     var map = L.map('map', {
+    //         layers: [ Esri_WorldImagery ]
+    //     });
+
+    //     var layerControl = L.control.layers(baseLayers);
+    //     layerControl.addTo(map);
+    //     map.setView([50.00, 14.44], 3);
+
+    //     return {
+    //         map: map,
+    //         layerControl: layerControl
+    //     };
+    // }
+
+    // demo map
+    var mapStuff = initMap();
+    var map = mapStuff.map;
+    var layerControl = mapStuff.layerControl;
+    var handleError = function(err){
+        console.log('handleError...');
+        console.log(err);
+    };
+
+    WindJSLeaflet.init({
+      localMode: true,
+      map: map,
+      layerControl: layerControl,
+      useNearest: true,
+      timeISO: null,
+      nearestDaysLimit: 7,
+      displayValues: true,
+      displayOptions: {
+        displayPosition: 'bottomleft',
+        displayEmptyString: 'No wind data'
+      },
+      overlayName: 'wind',
+
+      // https://github.com/danwild/wind-js-server
+      pingUrl: 'http://127.0.0.1:7000/alive',
+      latestUrl: 'http://127.0.0.1:7000/latest',
+      nearestUrl: 'http://127.0.0.1:7000/nearest',
+      errorCallback: handleError
+    });
+    </script>
+  </body>
+</html>

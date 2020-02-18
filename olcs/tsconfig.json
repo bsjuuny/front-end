@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      /* Basic Options */
+      "target": "ES6",
+      "module": "system",
+      "lib": ["es2017", "dom"],
+      "allowJs": true,
+      // "checkJs": true,
+      "noEmit": true,
+      // "strict": true,
+      "baseUrl": "./",
+      "paths": {
+        "ol/*": ["node_modules/ol/*"],
+      }
+    },
+    "include": [
+      "src/**/*.js",
+    ]
+}
